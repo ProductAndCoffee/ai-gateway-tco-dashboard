@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./gateway/gateway.db:/app/gateway.db
+
+  web:
+    build: ./web
+    ports:
+      - "3000:3000"
+    environment:
+      # Internal API URL for Server-Side Rendering (container-to-container)
+      - INTERNAL_API_URL=http://gateway:8000
+      # Public API URL for Client-Side Fetching (browser-to-host)
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - gateway
