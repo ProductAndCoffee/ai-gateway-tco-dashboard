@@ -31,18 +31,21 @@ jobs:
           tenant-id: ${{ secrets.AIGATEWAYTCODASHBOARD_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AIGATEWAYTCODASHBOARD_AZURE_SUBSCRIPTION_ID }}
 
+      - name: Prepare Container App template
+        run: |
+          sed "s|__BACKEND_IMAGE__|cac8f95c8dd9acr.azurecr.io/ai-gateway-tco-dashboard:${{ github.sha }}|g" azure/containerapp.yaml > /tmp/containerapp.yaml
+
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}/gateway
           dockerfilePath: Dockerfile
+          yamlConfigPath: /tmp/containerapp.yaml
           registryUrl: cac8f95c8dd9acr.azurecr.io
           registryUsername: ${{ secrets.AIGATEWAYTCODASHBOARD_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.AIGATEWAYTCODASHBOARD_REGISTRY_PASSWORD }}
           containerAppName: ai-gateway-tco-dashboard
           resourceGroup: ai-gateway-rg
           imageToBuild: cac8f95c8dd9acr.azurecr.io/ai-gateway-tco-dashboard:${{ github.sha }}
-          targetPort: 8000
-          ingress: external
 
 
