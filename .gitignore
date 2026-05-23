@@ -5,3 +5,26 @@ __pycache__/
 *.db
 .env*
 .DS_Store
+
+# Documentation and Design
+docs/
+figma/
+
+# Build outputs
+dist/
+build/
+out/
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# Vercel
+.vercel/
+
+# Logs and cache
+*.log
+.eslintcache
+.pytest_cache/
+.coverage
+htmlcov/
