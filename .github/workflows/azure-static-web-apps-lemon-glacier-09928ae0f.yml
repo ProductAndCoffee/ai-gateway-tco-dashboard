@@ -32,8 +32,8 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-           env: # 👈 ADD THIS BLOCK HERE
-          NEXT_PUBLIC_API_URL: "https://ai-gateway-tco-dashboard.jollymushroom-19cb73f6.eastus.azurecontainerapps.io>"
+           env: #  ADD THIS BLOCK HERE
+              NEXT_PUBLIC_API_URL: "https://ai-gateway-tco-dashboard.jollymushroom-19cb73f6.eastus.azurecontainerapps.io"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
